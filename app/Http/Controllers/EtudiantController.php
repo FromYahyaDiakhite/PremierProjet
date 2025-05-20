@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Etudiant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EtudiantController extends Controller
 {
@@ -60,5 +61,14 @@ class EtudiantController extends Controller
         return redirect('/etudiant')->with('status', 'L\'etudiant a ete bien superimee avec sucees');
 
 
+    }
+    public function sendEmail()
+    {
+        Mail::raw('Contenu de test', function ($message) {
+            $message->to('exemple@test.com')
+                    ->subject('Sujet test');
+        });
+
+        return 'Email envoyé';
     }
 }
